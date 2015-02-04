@@ -14,22 +14,6 @@ def main():
             ],
             'fam1984', f)
 
-    with open('2007er.csv', 'w+') as f:
-        vars_to_csv(
-            [
-                'ER36133',  # MAIN IND FOR JOB 1: 2000 CODE
-                'ER36291',  # DAYS VACATION
-            ],
-            'fam2007er', f)
-
-    with open('2009er.csv', 'w+') as f:
-        vars_to_csv(
-            [
-                'ER42168',  # MAIN IND FOR JOB 1: 2000 CODE
-                'ER42318',  # DAYS VACATION
-            ],
-            'fam2009er', f)
-
     with open('2011er.csv', 'w+') as f:
         vars_to_csv(
             [
