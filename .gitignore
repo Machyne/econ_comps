@@ -4,3 +4,4 @@
 .DS*
 psid/*.csv
 !psid/industries.csv
+db
