@@ -34,12 +34,12 @@ def get_industry(code):
 
 if __name__ == '__main__':
     output = StringIO.StringIO()
-    vars_to_csv(['ER47480'], 'fam2011er', output)
+    vars_to_csv([('ER47480', 'industry_code')], 'fam2011er', output)
     vals = output.getvalue()
     output.close()
 
     vals = vals.split('\n')[1:]  # ignore header
-    vals = set(map(int, filter(len, vals))) # unique ints only
-    vals.remove(0)
+    vals = set(map(int, filter(len, vals)))  # unique ints only
+    vals.remove(0)  # 0 = does not apply
     for x in vals:
         print get_industry(x)

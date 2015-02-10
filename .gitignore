@@ -2,6 +2,7 @@
 ~*
 ._*
 .DS*
-psid/*.csv
-!psid/industries.csv
 db
+
+1984_clean.csv
+2011_clean.csv

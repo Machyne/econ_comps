@@ -2,6 +2,10 @@ import os
 import re
 from collections import OrderedDict
 
+"""
+USAGE:
+python vars_to_cols.py > vars_columns.txt
+"""
 
 def vars_to_cols(fname, folder='.'):
     header_do_file = os.path.abspath(

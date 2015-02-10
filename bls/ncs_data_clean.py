@@ -14,10 +14,10 @@ sys.setrecursionlimit(2500)
 db = pymongo.MongoClient().ncs
 
 
-def process(clear=False):
+def process(clear=True):
     if clear:
-        db.benefits.remove({})
-    if db.benefits.count() > 0:
+        db.ebs.remove({})
+    if db.ebs.count() > 0:
         return
     soup = None
     html_file = os.path.abspath(
@@ -46,7 +46,7 @@ def process(clear=False):
                 break
         if year != '2011':
             continue  # couldn't find data on 2011
-        db.benefits.insert({
+        db.ebs.insert({
             'series_id': series_id,
             'ownership': ownership,
             'industry': industry,
@@ -55,10 +55,11 @@ def process(clear=False):
             'occupation': occupation,
             'subcell': subcell,
             'provision': provision,
-            'value': value,
+            'value': float(value),
             'se': se,
         })
 
 if __name__ == '__main__':
+    print 'Populating data base...'
     process()
-    print '\n'.join(db.benefits.distinct('provision'))
+    print '\n'.join(db.ebs.distinct('provision'))
