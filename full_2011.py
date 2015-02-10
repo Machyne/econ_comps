@@ -57,12 +57,12 @@ def clean(df):
 
 
 def do_stats(df):
-    pass
+    print df.describe()
 
 
 def main():
     df = None
-    if False and os.path.isfile(CLEAN2011):
+    if os.path.isfile(CLEAN2011):
         df = pd.io.parsers.read_csv(CLEAN2011)
     else:
         csv_file = os.path.abspath(
@@ -71,7 +71,7 @@ def main():
                 'psid', '2011er.csv'))
         with open(csv_file) as csv:
             df = pd.io.parsers.read_csv(csv)
-    clean(df)
+        clean(df)
     do_stats(df)
 
 if __name__ == '__main__':
