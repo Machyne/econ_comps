@@ -41,7 +41,9 @@ def _calc_salary(row):
 def clean(df):
     # make sex into dummy for is_female
     df['sex'] -= 1
-    # figure out total vacation
+    # remove unknown age values
+    df.age = df.age.replace(999, np.nan)
+    # figure out total vacation taken
     df['vacation'] = df.apply(_calc_vacation, axis=1)
     # fix salary to be annual amount
     df['salary'] = df.apply(_calc_salary, axis=1)

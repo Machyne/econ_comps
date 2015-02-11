@@ -12,8 +12,8 @@ def main():
     with open('1984.csv', 'w+') as f:
         vars_to_csv(
             [
+                ('V10474', 'given_vac'),      # JOB GET PD VAC?
                 ('V10475', 'hrs_paid_vac'),   # PD VAC HRS
-                ('V10476', 'type_paid_vac'),  # TYPE PAID VAC
                 ('V10553', 'took_vac'),       # WTR VACATION
                 ('V10554', 'weeks_vac'),      # WEEKS VACATION
                 ('V10419', 'age'),            # AGE OF 1984 HEAD
