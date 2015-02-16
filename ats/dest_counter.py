@@ -3,7 +3,7 @@ import re
 
 """
 USAGE:
-python dest_counter.py
+python dest_counter.py > travel_dest.txt
 
 NOTES:
 data downloaded from

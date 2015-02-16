@@ -2,13 +2,40 @@ import os
 
 import numpy as np
 import pandas as pd
+from pandas.tools.plotting import scatter_matrix
+import pylab
 
 from industry_to_days import get_census_mapper
 
-CLEAN2011 = os.path.abspath(
+"""
+USAGE:
+python full_2011.py
+
+CREATES:
+results/2011/clean.csv
+results/2011/scatter_matrix.png
+results/2011/summary.txt
+"""
+
+CLEAN_CSV = os.path.abspath(
         os.path.join(
             os.path.dirname(__file__),
-            '2011_clean.csv'))
+            'results', '2011', 'clean.csv'))
+
+PSID_CSV = os.path.abspath(
+        os.path.join(
+            os.path.dirname(__file__),
+            'psid', '2011.csv'))
+
+SCAT_MATRIX_PNG = os.path.abspath(
+        os.path.join(
+            os.path.dirname(__file__),
+            'results', '2011', 'scatter_matrix.png'))
+
+SUMMARY_TXT = os.path.abspath(
+        os.path.join(
+            os.path.dirname(__file__),
+            'results', '2011', 'summary.txt'))
 
 
 def _calc_vacation(row):
@@ -53,27 +80,31 @@ def clean(df):
     for col in ['took_vac', 'days_vac', 'weeks_vac', 'months_vac', 'industry',
                 'salary_amt', 'salary_unit']:
         df.drop(col, axis=1, inplace=True)
-    # write output to a file
-    with open(CLEAN2011, 'w+') as csv:
-        df.to_csv(path_or_buf=csv)
 
 
 def do_stats(df):
-    print df.describe()
+    # Summary stats
+    if not os.path.isfile(SUMMARY_TXT):
+        with open(SUMMARY_TXT, 'w') as f:
+            f.write(repr(df.describe()))
+    # Scatter matrix
+    if not os.path.isfile(SCAT_MATRIX_PNG):
+        scatter_matrix(df, alpha=0.2, figsize=(64, 64), diagonal='hist')
+        pylab.savefig(SCAT_MATRIX_PNG, bbox_inches='tight')
 
 
 def main():
     df = None
-    if os.path.isfile(CLEAN2011):
-        df = pd.io.parsers.read_csv(CLEAN2011)
+    if os.path.isfile(CLEAN_CSV):
+        df = pd.io.parsers.read_csv(CLEAN_CSV)
+        df.drop('Unnamed: 0', axis=1, inplace=True)
     else:
-        csv_file = os.path.abspath(
-            os.path.join(
-                os.path.dirname(__file__),
-                'psid', '2011er.csv'))
-        with open(csv_file) as csv:
+        with open(PSID_CSV) as csv:
             df = pd.io.parsers.read_csv(csv)
         clean(df)
+        # write output to a file
+        with open(CLEAN_CSV, 'w+') as csv:
+            df.to_csv(path_or_buf=csv)
     do_stats(df)
 
 if __name__ == '__main__':

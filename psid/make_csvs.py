@@ -5,7 +5,7 @@ USAGE:
 python make_csvs.py
 
 CREATES:
-1984.csv, 2011er.csv
+1984.csv, 2011.csv
 """
 
 def main():
@@ -24,7 +24,7 @@ def main():
             ],
             'fam1984', f)
 
-    with open('2011er.csv', 'w+') as f:
+    with open('2011.csv', 'w+') as f:
         vars_to_csv(
             [
                 ('ER47480', 'industry'),     # MAIN IND FOR JOB 1: 2000 CODE

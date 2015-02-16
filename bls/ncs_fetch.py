@@ -2,6 +2,10 @@ import json
 import prettytable
 import requests
 
+"""
+unused
+"""
+
 
 def fetch_series(series, startyear='2010', endyear='2014'):
     headers = {'Content-type': 'application/json'}

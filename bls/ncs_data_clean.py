@@ -7,6 +7,11 @@ import sys
 from bs4 import BeautifulSoup
 import pymongo
 
+"""
+USAGE:
+python ncs_data_clean.py > ncs_inds.txt
+"""
+
 # Wrap sys.stdout into a StreamWriter to allow writing unicode.
 sys.stdout = codecs.getwriter(locale.getpreferredencoding())(sys.stdout)
 sys.setrecursionlimit(2500)
@@ -14,7 +19,7 @@ sys.setrecursionlimit(2500)
 db = pymongo.MongoClient().ncs
 
 
-def process(clear=True):
+def read_html_to_db(clear=True):
     if clear:
         db.ebs.remove({})
     if db.ebs.count() > 0:
@@ -60,6 +65,5 @@ def process(clear=True):
         })
 
 if __name__ == '__main__':
-    print 'Populating data base...'
-    process()
-    print '\n'.join(db.ebs.distinct('provision'))
+    read_html_to_db()
+    print '\n'.join(db.ebs.distinct('industry'))

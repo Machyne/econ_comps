@@ -4,6 +4,11 @@ import re
 import numpy as np
 import pymongo
 
+"""
+USAGE:
+python industry_to_days.py > vacation_days.txt
+"""
+
 CROSSWALK = os.path.abspath(
         os.path.join(
             os.path.dirname(__file__),

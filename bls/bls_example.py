@@ -2,6 +2,9 @@ import requests
 import json
 import prettytable
 
+"""
+unused
+"""
 
 headers = {'Content-type': 'application/json'}
 data = json.dumps({"seriesid": ['CUUR0000SA0','SUUR0000SA0'],"startyear":"2011", "endyear":"2014"})
