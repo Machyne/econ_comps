@@ -33,7 +33,7 @@ def get_f_path(fname):
 CLEAN_CSV = get_f_path('clean.csv')
 HET_WHITE_TXT = get_f_path('het_white.txt')
 OLS1_TXT = get_f_path('ols1.txt')
-OLS2_TXT = get_f_path('ols1.txt')
+OLS2_TXT = get_f_path('ols2.txt')
 SCAT_MATRIX1_PNG = get_f_path('scatter_matrix1.png')
 SCAT_MATRIX2_PNG = get_f_path('scatter_matrix2.png')
 SUMMARY_TXT = get_f_path('summary.txt')
@@ -83,14 +83,16 @@ def do_stats(df):
     if not f_exists(SCAT_MATRIX1_PNG):
         scatter_matrix(df, alpha=0.2, figsize=(64, 64), diagonal='hist')
         pylab.savefig(SCAT_MATRIX1_PNG, bbox_inches='tight')
-    if not f_exists(OLS1_TXT):
+    if True: # not f_exists(OLS1_TXT):
         ols_results = smf.ols(
             formula='vacation ~ paid_vacation + np.square(paid_vacation) + '
                     'age + fam_size + income83 + sex + salary + '
                     'np.square(salary)',
             data=df).fit()
         with open(OLS1_TXT, 'w') as f:
-            f.write(repr(ols_results.summary()))
+            f.write(str(ols_results.summary()))
+            f.write('\n\nCondition Number: {}'.format(
+                np.linalg.cond(ols_results.model.exog)))
 
     # Need to drop salary, too much autocorrelation
     df.drop('salary', axis=1, inplace=True)
@@ -125,7 +127,9 @@ def do_stats(df):
                     'age + fam_size + income83 + sex',
             data=df).fit()
         with open(OLS2_TXT, 'w') as f:
-            f.write(repr(ols_results.summary()))
+            f.write(str(ols_results.summary()))
+            f.write('\n\nCondition Number: {}'.format(
+                np.linalg.cond(ols_results.model.exog)))
 
 
 def main():
