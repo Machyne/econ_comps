@@ -56,7 +56,7 @@ def _calc_vacation(key1, key2, bad, scale):
 
 def clean(df):
     # make sex into dummy for is_female
-    df['sex'] -= 1
+    df['is_female'] = df['sex'] - 1
     # figure out total vacation taken
     df['vacation'] = df.apply(
         _calc_vacation('took_vac', 'weeks_vac', 99, 7), axis=1)
@@ -70,7 +70,7 @@ def clean(df):
     df['paid_vacation'] = df.apply(
         _calc_vacation('given_vac', 'hrs_paid_vac', 9999, 1. / 40.), axis=1)
     # drop old values
-    for col in ['took_vac', 'weeks_vac', 'given_vac', 'hrs_paid_vac']:
+    for col in ['sex', 'took_vac', 'weeks_vac', 'given_vac', 'hrs_paid_vac']:
         df.drop(col, axis=1, inplace=True)
 
 
@@ -96,7 +96,7 @@ def do_stats(df):
     if not f_exists(OLS1_TXT):
         ols_results = smf.ols(
             formula='vacation ~ paid_vacation + np.square(paid_vacation) + '
-                    'age + fam_size + income83 + sex + salary + '
+                    'age + fam_size + income83 + is_female + salary + '
                     'np.square(salary)',
             data=df).fit()
         with open(OLS1_TXT, 'w') as f:
@@ -110,7 +110,7 @@ def do_stats(df):
     if not f_exists(HET_WHITE_TXT):
         ols_results = smf.ols(
             formula='vacation ~ paid_vacation + np.square(paid_vacation) + '
-                    'age + fam_size + income83 + sex',
+                    'age + fam_size + income83 + is_female',
             data=df).fit()
         names = ['LM', 'LM P val.', 'F Stat.', 'F Stat. P val.']
         test = sms.het_white(ols_results.resid, ols_results.model.exog)
@@ -134,7 +134,7 @@ def do_stats(df):
     if not f_exists(OLS2_TXT):
         ols_results = smf.ols(
             formula='vacation ~ paid_vacation + np.square(paid_vacation) + '
-                    'age + fam_size + income83 + sex',
+                    'age + fam_size + income83 + is_female',
             data=df).fit()
         with open(OLS2_TXT, 'w') as f:
             f.write(str(ols_results.summary()))
