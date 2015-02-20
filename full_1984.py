@@ -31,7 +31,7 @@ def get_f_path(fname):
 
 
 CLEAN_CSV = get_f_path('clean.csv')
-CORR1_TXT = get_f_path('corr1.txt')
+CORR_TXT = get_f_path('corr.txt')
 HET_WHITE_TXT = get_f_path('het_white.txt')
 OLS1_TXT = get_f_path('ols1.txt')
 OLS2_TXT = get_f_path('ols2.txt')
@@ -84,14 +84,14 @@ def do_stats(df):
     if not f_exists(SCAT_MATRIX1_PNG):
         scatter_matrix(df, alpha=0.2, figsize=(64, 64), diagonal='hist')
         pylab.savefig(SCAT_MATRIX1_PNG, bbox_inches='tight')
-    if not f_exists(CORR1_TXT):
+    if not f_exists(CORR_TXT):
         corr = df.corr()
         for i, k in enumerate(corr):
             row = corr[k]
             for j in range(len(row)):
                 if j > i:
                     row[j] = np.nan
-        with open(CORR1_TXT, 'w') as f:
+        with open(CORR_TXT, 'w') as f:
             f.write(corr.to_string(na_rep=''))
     if not f_exists(OLS1_TXT):
         ols_results = smf.ols(
