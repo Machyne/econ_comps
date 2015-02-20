@@ -13,7 +13,12 @@ python full_1984.py
 
 CREATES:
 results/1984/clean.csv
-results/1984/scatter_matrix.png
+results/1984/corr.txt
+results/1984/het_white.txt
+results/1984/ols1.txt
+results/1984/ols2.txt
+results/1984/scatter_matrix1.png
+results/1984/scatter_matrix2.png
 results/1984/summary.txt
 """
 
