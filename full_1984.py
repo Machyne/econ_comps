@@ -14,7 +14,7 @@ python full_1984.py
 CREATES:
 results/1984/clean.csv
 results/1984/corr.txt
-results/1984/het_white.txt
+results/1984/het_breushpagan.txt
 results/1984/ols1.txt
 results/1984/ols2.txt
 results/1984/scatter_matrix1.png
@@ -37,7 +37,7 @@ def get_f_path(fname):
 
 CLEAN_CSV = get_f_path('clean.csv')
 CORR_TXT = get_f_path('corr.txt')
-HET_WHITE_TXT = get_f_path('het_white.txt')
+HET_BP_TXT = get_f_path('het_breushpagan.txt')
 OLS1_TXT = get_f_path('ols1.txt')
 OLS2_TXT = get_f_path('ols2.txt')
 SCAT_MATRIX1_PNG = get_f_path('scatter_matrix1.png')
@@ -112,15 +112,20 @@ def do_stats(df):
     # Need to drop salary, too much autocorrelation
     df.drop('salary', axis=1, inplace=True)
 
-    if not f_exists(HET_WHITE_TXT):
+    # make a new scatter matrix to use for the paper
+    if not f_exists(SCAT_MATRIX2_PNG):
+        scatter_matrix(df, alpha=0.2, figsize=(64, 64), diagonal='hist')
+        pylab.savefig(SCAT_MATRIX2_PNG, bbox_inches='tight')
+
+    if not f_exists(HET_BP_TXT):
         ols_results = smf.ols(
             formula='vacation ~ paid_vacation + np.square(paid_vacation) + '
                     'age + fam_size + income83 + is_female',
             data=df).fit()
         names = ['LM', 'LM P val.', 'F Stat.', 'F Stat. P val.']
-        test = sms.het_white(ols_results.resid, ols_results.model.exog)
+        test = sms.het_breushpagan(ols_results.resid, ols_results.model.exog)
         f_p = test[3]
-        with open(HET_WHITE_TXT, 'w') as f:
+        with open(HET_BP_TXT, 'w') as f:
             str_ =  '\n'.join('{}: {}'.format(n, v)
                               for n, v in zip(names, test))
             f.write(str_ + '\n\n')
@@ -130,11 +135,6 @@ def do_stats(df):
                 f.write('Warning: Heteroskedasticity found!\n')
 
     # no Heteroskedasticity found
-    # make a new scatter matrix to use for the paper
-    if not f_exists(SCAT_MATRIX2_PNG):
-        scatter_matrix(df, alpha=0.2, figsize=(64, 64), diagonal='hist')
-        pylab.savefig(SCAT_MATRIX2_PNG, bbox_inches='tight')
-
     # final OLS results
     if not f_exists(OLS2_TXT):
         ols_results = smf.ols(
@@ -164,4 +164,4 @@ def main():
 
 if __name__ == '__main__':
     main()
-    print 'Success! :)'
+    print '1984 succeeds! :)'
