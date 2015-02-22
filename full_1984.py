@@ -66,20 +66,37 @@ def clean(df):
     df['vacation'] = df.apply(
         _calc_vacation('took_vac', 'weeks_vac', 99, 7), axis=1)
     # fix salary to be annual amount
-    df.salary = df.salary.replace(0.00, np.nan)
-    df.salary = df.salary.replace(99.99, np.nan)
+    df.salary.replace(0.00, np.nan, inplace=True)
+    df.salary.replace(99.99, np.nan, inplace=True)
     df.salary *= 2000
+    # remove outliers
+    df.ix[df.salary < 1e3] = np.nan
+    df.ix[df.salary >= 400e3] = np.nan
+    # make employment into dummy for is_employed
+    df['is_employed'] = df.employment
+    # remove all those not working
+    for i in range(2,10):
+        df.is_employed.replace(i, 0, inplace=True)
     # remove unknown age values
-    df.age = df.age.replace(99, np.nan)
+    df.age.replace(99, np.nan, inplace=True)
     # compute vacation given
     df['paid_vacation'] = df.apply(
         _calc_vacation('given_vac', 'hrs_paid_vac', 9999, 1. / 40.), axis=1)
     # drop old values
-    for col in ['sex', 'took_vac', 'weeks_vac', 'given_vac', 'hrs_paid_vac']:
+    for col in ['sex', 'took_vac', 'weeks_vac', 'given_vac', 'hrs_paid_vac',
+                'employment']:
         df.drop(col, axis=1, inplace=True)
 
 
 def do_stats(df):
+    # Only view those that received vacation and are employed
+    df.is_employed.replace(0.0, np.nan, inplace=True)
+    df.paid_vacation.replace(0.0, np.nan, inplace=True)
+    df.dropna(inplace=True)
+    # No longer need this dummy
+    df.drop('is_employed', axis=1, inplace=True)
+
+
     # Summary stats
     if not f_exists(SUMMARY_TXT):
         with open(SUMMARY_TXT, 'w') as f:
@@ -140,7 +157,7 @@ def do_stats(df):
         ols_results = smf.ols(
             formula='vacation ~ paid_vacation + np.square(paid_vacation) + '
                     'age + fam_size + income83 + is_female',
-            data=df).fit()
+            data=df).fit().get_robustcov_results(cov_type='HAC', maxlags=1)
         with open(OLS2_TXT, 'w') as f:
             f.write(str(ols_results.summary()))
             f.write('\n\nCondition Number: {}'.format(

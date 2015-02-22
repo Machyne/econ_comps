@@ -80,15 +80,30 @@ def clean(df):
     df['vacation'] = df.apply(_calc_vacation, axis=1)
     # fix salary to be annual amount
     df['salary'] = df.apply(_calc_salary, axis=1)
+    # remove outliers
+    df.ix[df.salary < 1e3] = np.nan
+    df.ix[df.salary >= 400e3] = np.nan
+    # make employment into dummy for is_employed
+    df['is_employed'] = df.employment
+    # remove all those not working
+    for i in range(2,10) + [99]:
+        df.is_employed.replace(i, 0, inplace=True)
     # merge industry data
     df['paid_vacation'] = df.industry.map(get_census_mapper())
     # drop old values
     for col in ['took_vac', 'days_vac', 'weeks_vac', 'months_vac', 'industry',
-                'salary_amt', 'salary_unit', 'sex']:
+                'salary_amt', 'salary_unit', 'sex', 'employment']:
         df.drop(col, axis=1, inplace=True)
 
 
 def do_stats(df):
+    # Only view those that received vacation and are employed
+    df.is_employed.replace(0.0, np.nan, inplace=True)
+    df.paid_vacation.replace(0.0, np.nan, inplace=True)
+    df.dropna(inplace=True)
+    # No longer need this dummy
+    df.drop('is_employed', axis=1, inplace=True)
+
     # Summary stats
     if not f_exists(SUMMARY_TXT):
         with open(SUMMARY_TXT, 'w') as f:
@@ -118,8 +133,8 @@ def do_stats(df):
             f.write('\n\nCondition Number: {}'.format(
                 np.linalg.cond(ols_results.model.exog)))
 
-    # Need to drop income, too much autocorrelation
-    df.drop('income10', axis=1, inplace=True)
+    # Need to drop salary, too much autocorrelation
+    df.drop('salary', axis=1, inplace=True)
 
     # make a new scatter matrix to use for the paper
     if not f_exists(SCAT_MATRIX2_PNG):
@@ -129,7 +144,7 @@ def do_stats(df):
     if not f_exists(HET_BP_TXT):
         ols_results = smf.ols(
             formula='vacation ~ paid_vacation + np.square(paid_vacation) + '
-                    'age + fam_size + is_female + salary + np.square(salary)',
+                    'age + fam_size + income10+ is_female',
             data=df).fit()
         names = ['LM', 'LM P val.', 'F Stat.', 'F Stat. P val.']
         test = sms.het_breushpagan(ols_results.resid, ols_results.model.exog)
@@ -143,12 +158,12 @@ def do_stats(df):
             else:
                 f.write('Warning: Heteroskedasticity found!\n')
 
-    # Heteroskedasticity found!
+    # no Heteroskedasticity found
     # final OLS results with robust standard errors
     if not f_exists(OLS2_TXT):
         ols_results = smf.ols(
             formula='vacation ~ paid_vacation + np.square(paid_vacation) + '
-                    'age + fam_size + is_female + salary + np.square(salary)',
+                    'age + fam_size + income10+ is_female',
             data=df).fit().get_robustcov_results(cov_type='HAC', maxlags=1)
         with open(OLS2_TXT, 'w') as f:
             f.write(str(ols_results.summary()))

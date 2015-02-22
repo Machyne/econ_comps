@@ -1,3 +1,5 @@
+import os
+
 from vars_to_csv import vars_to_csv
 
 """
@@ -9,7 +11,11 @@ CREATES:
 """
 
 def main():
-    with open('1984.csv', 'w+') as f:
+    CSV1984 = os.path.abspath(
+        os.path.join(
+            os.path.dirname(__file__),
+            '1984.csv'))
+    with open(CSV1984, 'w+') as f:
         vars_to_csv(
             [
                 ('V10474', 'given_vac'),      # JOB GET PD VAC?
@@ -21,10 +27,15 @@ def main():
                 ('V10277', 'income83'),       # H+W 1983 TAXABLE Y
                 ('V10420', 'sex'),            # SEX OF 1984 HEAD
                 ('V10463', 'salary'),         # PAY/HR-SALARY
+                ('V10453', 'employment'),     # EMPLOYMENT STATUS-HD
             ],
             'fam1984', f)
 
-    with open('2011.csv', 'w+') as f:
+    CSV2011 = os.path.abspath(
+        os.path.join(
+            os.path.dirname(__file__),
+            '2011.csv'))
+    with open(CSV2011, 'w+') as f:
         vars_to_csv(
             [
                 ('ER47480', 'industry'),     # MAIN IND FOR JOB 1: 2000 CODE
@@ -36,8 +47,9 @@ def main():
                 ('ER47316', 'fam_size'),     # # IN FU
                 ('ER52259', 'income10'),     # HEAD AND WIFE TAXABLE INCOME
                 ('ER47318', 'sex'),          # SEX OF HEAD
-                ('ER47495', 'salary_amt'),   # SALARY AMOUNT"
-                ('ER47496', 'salary_unit'),  # SALARY PER WHAT"
+                ('ER47495', 'salary_amt'),   # SALARY AMOUNT
+                ('ER47496', 'salary_unit'),  # SALARY PER WHAT
+                ('ER47448', 'employment'),   # EMPLOYMENT STATUS-1ST MENTION
             ],
             'fam2011er', f)
 
