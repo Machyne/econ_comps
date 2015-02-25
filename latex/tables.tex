@@ -1,0 +1,39 @@
+\documentclass{article}
+\usepackage{tabularx}
+\usepackage{xcolor}
+\title{Econ Comps}
+\author{Matt Cotter}
+\date{February 2015}
+\begin{document}
+
+    \begin{center}
+    \setlength{\extrarowheight}{3pt}
+    \begin{table}[h]
+    \centering
+    \begin{tabular}{l|r|r}
+    \multicolumn{1}{c|}{variable} &             1984 Coefficients &              2011 Coefficients \\ \hline \hline
+    intercept                     &   2.300\textcolor{white}{***} &  -35.805**\textcolor{white}{*} \\
+                                  & (2.531)\textcolor{white}{***} & (13.583)\textcolor{white}{***} \\ \hline
+    paid vacation                 &   1.718*\textcolor{white}{**} &    6.172**\textcolor{white}{*} \\
+                                  & (0.813)\textcolor{white}{***} &  (2.022)\textcolor{white}{***} \\ \hline
+    (paid vacation$)^2$           &  -0.008\textcolor{white}{***} &   -0.207**\textcolor{white}{*} \\
+                                  & (0.064)\textcolor{white}{***} &  (0.075)\textcolor{white}{***} \\ \hline
+    age                           &   0.185***\textcolor{white}{} &    0.184**\textcolor{white}{*} \\
+                                  & (0.047)\textcolor{white}{***} &  (0.058)\textcolor{white}{***} \\ \hline
+    income                        &   0.000***\textcolor{white}{} &   -0.229\textcolor{white}{***} \\
+                                  & (0.000)\textcolor{white}{***} &  (0.323)\textcolor{white}{***} \\ \hline
+    is\_female                    &   6.103***\textcolor{white}{} &    0.000**\textcolor{white}{*} \\
+                                  & (1.537)\textcolor{white}{***} &  (0.000)\textcolor{white}{***} \\ \hline
+    family size                   &  -0.009\textcolor{white}{***} &   -3.417\textcolor{white}{***} \\
+                                  & (0.334)\textcolor{white}{***} &  (1.203)\textcolor{white}{***}
+    \end{tabular}
+    \caption{OLS results, with vacation taken (in days) as dependent variable.}
+    \label{my-label}
+      Notes: $n_{1984}$ = 1420 and $n_{2011}$ = 1953.
+      Robust standard errors in parentheses.
+      *: p \textless\ 0.05, **: p \textless\ 0.01, ***: p \textless\ 0.001
+    \end{table}
+    \end{center}
+
+
+\end{document}
