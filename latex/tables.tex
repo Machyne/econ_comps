@@ -6,34 +6,72 @@
 \date{February 2015}
 \begin{document}
 
-    \begin{center}
+    \begin{table}[h]
+    \centering
+    \hspace*{-1.5cm}
+    \begin{tabular}{l|r|r|r|r|r|r|r}
+                     & vacation & paid\_vacation &   age & fam\_size & is\_female & income83 & salary \\ \hline
+      vacation       &    1.000 &          0.179 & 0.154 &    -0.015 &      0.057 &    0.143 &  0.143 \\ \hline
+      paid\_vacation &          &          1.000 & 0.125 &     0.014 &     -0.067 &    0.168 &  0.214 \\ \hline
+      age            &          &                & 1.000 &     0.044 &      0.025 &    0.213 &  0.226 \\ \hline
+      fam\_size      &          &                &       &     1.000 &     -0.340 &    0.136 &  0.092 \\ \hline
+      is\_female     &          &                &       &           &      1.000 &   -0.392 & -0.287 \\ \hline
+      income83       &          &                &       &           &            &    1.000 &  0.775 \\ \hline
+      salary         &          &                &       &           &            &          &  1.000
+    \end{tabular}
+    \hspace*{-1.5cm}
+    \caption{Correlation Matrix 1984}
+    \label{1984-correlation}
+      Notes: every cell contains the correlation ($r$) between the row and column headers.
+    \end{table}
+
+    \begin{table}[h]
+    \centering
+    \hspace*{-1.5cm}
+    \begin{tabular}{l|r|r|r|r|r|r|r}
+                     & vacation & paid\_vacation &    age & fam\_size & is\_female & income10 & salary \\ \hline
+      vacation       &    1.000 &          0.048 &  0.115 &     0.004 &     -0.073 &    0.088 &  0.132 \\ \hline
+      paid\_vacation &          &          1.000 & -0.061 &    -0.053 &      0.111 &    0.010 &  0.074 \\ \hline
+      age            &          &                &  1.000 &    -0.033 &     -0.075 &    0.232 &  0.239 \\ \hline
+      fam\_size      &          &                &        &     1.000 &     -0.354 &    0.118 &  0.081 \\ \hline
+      is\_female     &          &                &        &           &      1.000 &   -0.280 & -0.193 \\ \hline
+      income10       &          &                &        &           &            &    1.000 &  0.698 \\ \hline
+      salary         &          &                &        &           &            &          &  1.000
+    \end{tabular}
+    \hspace*{-1.5cm}
+    \caption{Correlation Matrix 2011}
+    \label{2011-correlation}
+      Notes: every cell contains the correlation ($r$) between the row and column headers.
+    \end{table}
+
     \setlength{\extrarowheight}{3pt}
     \begin{table}[h]
     \centering
+    \hspace*{-1.5cm}
     \begin{tabular}{l|r|r}
-    \multicolumn{1}{c|}{variable} &             1984 Coefficients &              2011 Coefficients \\ \hline \hline
-    intercept                     &   2.300\textcolor{white}{***} &  -35.805**\textcolor{white}{*} \\
-                                  & (2.531)\textcolor{white}{***} & (13.583)\textcolor{white}{***} \\ \hline
-    paid vacation                 &   1.718*\textcolor{white}{**} &    6.172**\textcolor{white}{*} \\
-                                  & (0.813)\textcolor{white}{***} &  (2.022)\textcolor{white}{***} \\ \hline
-    (paid vacation$)^2$           &  -0.008\textcolor{white}{***} &   -0.207**\textcolor{white}{*} \\
-                                  & (0.064)\textcolor{white}{***} &  (0.075)\textcolor{white}{***} \\ \hline
-    age                           &   0.185***\textcolor{white}{} &    0.184**\textcolor{white}{*} \\
-                                  & (0.047)\textcolor{white}{***} &  (0.058)\textcolor{white}{***} \\ \hline
-    income                        &   0.000***\textcolor{white}{} &   -0.229\textcolor{white}{***} \\
-                                  & (0.000)\textcolor{white}{***} &  (0.323)\textcolor{white}{***} \\ \hline
-    is\_female                    &   6.103***\textcolor{white}{} &    0.000**\textcolor{white}{*} \\
-                                  & (1.537)\textcolor{white}{***} &  (0.000)\textcolor{white}{***} \\ \hline
-    family size                   &  -0.009\textcolor{white}{***} &   -3.417\textcolor{white}{***} \\
-                                  & (0.334)\textcolor{white}{***} &  (1.203)\textcolor{white}{***}
+    Variable            &             1984 Coefficients &              2011 Coefficients \\ \hline \hline
+    intercept           &   2.300\textcolor{white}{***} &  -35.805**\textcolor{white}{*} \\
+                        & (2.531)\textcolor{white}{***} & (13.583)\textcolor{white}{***} \\ \hline
+    paid vacation       &   1.718*\textcolor{white}{**} &    6.172**\textcolor{white}{*} \\
+                        & (0.813)\textcolor{white}{***} &  (2.022)\textcolor{white}{***} \\ \hline
+    (paid vacation$)^2$ &  -0.008\textcolor{white}{***} &   -0.207**\textcolor{white}{*} \\
+                        & (0.064)\textcolor{white}{***} &  (0.075)\textcolor{white}{***} \\ \hline
+    age                 &   0.185***\textcolor{white}{} &    0.184**\textcolor{white}{*} \\
+                        & (0.047)\textcolor{white}{***} &  (0.058)\textcolor{white}{***} \\ \hline
+    family size         &  -0.009\textcolor{white}{***} &   -0.229\textcolor{white}{***} \\
+                        & (0.334)\textcolor{white}{***} &  (0.323)\textcolor{white}{***} \\ \hline
+    is\_female          &   6.103***\textcolor{white}{} &   -3.417**\textcolor{white}{*} \\
+                        & (1.537)\textcolor{white}{***} &  (1.203)\textcolor{white}{***} \\ \hline
+    income              &   0.000***\textcolor{white}{} &    0.000\textcolor{white}{***} \\
+                        & (0.000)\textcolor{white}{***} &  (0.000)\textcolor{white}{***}
     \end{tabular}
+    \hspace*{-1.5cm}
     \caption{OLS results, with vacation taken (in days) as dependent variable.}
-    \label{my-label}
+    \label{ols}
       Notes: $n_{1984}$ = 1420 and $n_{2011}$ = 1953.
       Robust standard errors in parentheses.
       *: p \textless\ 0.05, **: p \textless\ 0.01, ***: p \textless\ 0.001
     \end{table}
-    \end{center}
 
 
 \end{document}

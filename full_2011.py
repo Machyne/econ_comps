@@ -15,9 +15,17 @@ python full_2011.py
 
 CREATES:
 results/2011/clean.csv
-results/2011/scatter_matrix.png
+results/2011/corr.txt
+results/2011/het_breushpagan.txt
+results/2011/ols1.txt
+results/2011/ols2.txt
+results/2011/scatter_matrix1.png
+results/2011/scatter_matrix2.png
 results/2011/summary.txt
 """
+
+COL_ORDER = ['vacation', 'paid_vacation', 'age', 'fam_size', 'is_female',
+             'income10', 'salary', 'is_employed']
 
 PSID_CSV = os.path.abspath(
         os.path.join(
@@ -94,6 +102,8 @@ def clean(df):
     for col in ['took_vac', 'days_vac', 'weeks_vac', 'months_vac', 'industry',
                 'salary_amt', 'salary_unit', 'sex', 'employment']:
         df.drop(col, axis=1, inplace=True)
+    df = df.reindex_axis(sorted(df.columns, key=COL_ORDER.index), axis=1)
+    return df
 
 
 def do_stats(df):
@@ -115,17 +125,21 @@ def do_stats(df):
         pylab.savefig(SCAT_MATRIX1_PNG, bbox_inches='tight')
     if not f_exists(CORR_TXT):
         corr = df.corr()
+        corr = corr.reindex_axis(
+            sorted(corr.columns, key=COL_ORDER.index), axis=0)
+        corr = corr.reindex_axis(
+            sorted(corr.columns, key=COL_ORDER.index), axis=1)
         for i, k in enumerate(corr):
             row = corr[k]
             for j in range(len(row)):
                 if j > i:
                     row[j] = np.nan
         with open(CORR_TXT, 'w') as f:
-            f.write(corr.to_string(na_rep=''))
+            f.write(np.round(corr, decimals=3).to_string(na_rep=''))
     if not f_exists(OLS1_TXT):
         ols_results = smf.ols(
             formula='vacation ~ paid_vacation + np.square(paid_vacation) + '
-                    'age + fam_size + income10 + is_female + salary + '
+                    'age + fam_size + is_female + income10 + salary + '
                     'np.square(salary)',
             data=df).fit()
         with open(OLS1_TXT, 'w') as f:
@@ -144,7 +158,7 @@ def do_stats(df):
     if not f_exists(HET_BP_TXT):
         ols_results = smf.ols(
             formula='vacation ~ paid_vacation + np.square(paid_vacation) + '
-                    'age + fam_size + income10+ is_female',
+                    'age + fam_size + is_female + income10',
             data=df).fit()
         names = ['LM', 'LM P val.', 'F Stat.', 'F Stat. P val.']
         test = sms.het_breushpagan(ols_results.resid, ols_results.model.exog)
@@ -163,7 +177,7 @@ def do_stats(df):
     if not f_exists(OLS2_TXT):
         ols_results = smf.ols(
             formula='vacation ~ paid_vacation + np.square(paid_vacation) + '
-                    'age + fam_size + income10+ is_female',
+                    'age + fam_size + is_female + income10',
             data=df).fit().get_robustcov_results(cov_type='HAC', maxlags=1)
         with open(OLS2_TXT, 'w') as f:
             f.write(str(ols_results.summary()))
@@ -179,7 +193,7 @@ def main():
     else:
         with open(PSID_CSV) as csv:
             df = pd.io.parsers.read_csv(csv)
-        clean(df)
+        df = clean(df)
         # write output to a file
         with open(CLEAN_CSV, 'w+') as csv:
             df.to_csv(path_or_buf=csv)
