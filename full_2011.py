@@ -181,11 +181,12 @@ def do_stats(df):
             f.write(str(ols_results.summary()))
             f.write('\n\nCondition Number: {}'.format(
                 np.linalg.cond(ols_results.model.exog)))
+    return df
 
 
 def main():
     df = None
-    if os.path.isfile(CLEAN_CSV):
+    if f_exists(CLEAN_CSV):
         df = pd.io.parsers.read_csv(CLEAN_CSV)
         df.drop('Unnamed: 0', axis=1, inplace=True)
     else:
@@ -195,7 +196,7 @@ def main():
         # write output to a file
         with open(CLEAN_CSV, 'w+') as csv:
             df.to_csv(path_or_buf=csv)
-    do_stats(df)
+    return do_stats(df)
 
 
 if __name__ == '__main__':

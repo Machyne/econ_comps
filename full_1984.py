@@ -169,6 +169,7 @@ def do_stats(df):
             f.write(str(ols_results.summary()))
             f.write('\n\nCondition Number: {}'.format(
                 np.linalg.cond(ols_results.model.exog)))
+    return df
 
 
 def main():
@@ -183,7 +184,7 @@ def main():
         # write output to a file
         with open(CLEAN_CSV, 'w+') as csv:
             df.to_csv(path_or_buf=csv)
-    do_stats(df)
+    return do_stats(df)
 
 
 if __name__ == '__main__':
