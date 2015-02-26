@@ -1,21 +1,26 @@
 \documentclass{article}
 \usepackage{tabularx}
+\usepackage{multirow}
 \usepackage{xcolor}
 \title{Econ Comps}
 \author{Matt Cotter}
 \date{February 2015}
 \begin{document}
 
+
+    %%%%%%%%%%%%%%%%%%%%%
+    % Correlation Matrix
+    \setlength{\extrarowheight}{3pt}
     \begin{table}[h]
     \centering
     \hspace*{-1.5cm}
     \begin{tabular}{l|r|r|r|r|r|r|r}
                      & vacation & paid\_vacation &   age & fam\_size & is\_female & income83 & salary \\ \hline
-      vacation       &    1.000 &          0.179 & 0.154 &    -0.015 &      0.057 &    0.143 &  0.143 \\ \hline
-      paid\_vacation &          &          1.000 & 0.125 &     0.014 &     -0.067 &    0.168 &  0.214 \\ \hline
-      age            &          &                & 1.000 &     0.044 &      0.025 &    0.213 &  0.226 \\ \hline
-      fam\_size      &          &                &       &     1.000 &     -0.340 &    0.136 &  0.092 \\ \hline
-      is\_female     &          &                &       &           &      1.000 &   -0.392 & -0.287 \\ \hline
+      vacation       &    1.000 &          0.182 & 0.156 &    -0.018 &      0.060 &    0.139 &  0.141 \\ \hline
+      paid\_vacation &          &          1.000 & 0.128 &     0.017 &     -0.068 &    0.171 &  0.215 \\ \hline
+      age            &          &                & 1.000 &     0.047 &      0.023 &    0.216 &  0.230 \\ \hline
+      fam\_size      &          &                &       &     1.000 &     -0.338 &    0.131 &  0.089 \\ \hline
+      is\_female     &          &                &       &           &      1.000 &   -0.389 & -0.285 \\ \hline
       income83       &          &                &       &           &            &    1.000 &  0.775 \\ \hline
       salary         &          &                &       &           &            &          &  1.000
     \end{tabular}
@@ -24,18 +29,19 @@
     \label{1984-correlation}
       Notes: every cell contains the correlation ($r$) between the row and column headers.
     \end{table}
-
+    %%%%%%%%%%
+    \setlength{\extrarowheight}{3pt}
     \begin{table}[h]
     \centering
     \hspace*{-1.5cm}
     \begin{tabular}{l|r|r|r|r|r|r|r}
                      & vacation & paid\_vacation &    age & fam\_size & is\_female & income10 & salary \\ \hline
-      vacation       &    1.000 &          0.048 &  0.115 &     0.004 &     -0.073 &    0.088 &  0.132 \\ \hline
-      paid\_vacation &          &          1.000 & -0.061 &    -0.053 &      0.111 &    0.010 &  0.074 \\ \hline
-      age            &          &                &  1.000 &    -0.033 &     -0.075 &    0.232 &  0.239 \\ \hline
-      fam\_size      &          &                &        &     1.000 &     -0.354 &    0.118 &  0.081 \\ \hline
-      is\_female     &          &                &        &           &      1.000 &   -0.280 & -0.193 \\ \hline
-      income10       &          &                &        &           &            &    1.000 &  0.698 \\ \hline
+      vacation       &    1.000 &          0.049 &  0.116 &     0.002 &     -0.070 &    0.100 &  0.133 \\ \hline
+      paid\_vacation &          &          1.000 & -0.065 &    -0.050 &      0.113 &    0.003 &  0.069 \\ \hline
+      age            &          &                &  1.000 &    -0.032 &     -0.069 &    0.281 &  0.239 \\ \hline
+      fam\_size      &          &                &        &     1.000 &     -0.356 &    0.163 &  0.091 \\ \hline
+      is\_female     &          &                &        &           &      1.000 &   -0.361 & -0.197 \\ \hline
+      income10       &          &                &        &           &            &    1.000 &  0.731 \\ \hline
       salary         &          &                &        &           &            &          &  1.000
     \end{tabular}
     \hspace*{-1.5cm}
@@ -44,24 +50,70 @@
       Notes: every cell contains the correlation ($r$) between the row and column headers.
     \end{table}
 
+
+    %%%%%%%%%%%%%%%%%%%%%
+    % Summary Statistics
+    \setlength{\extrarowheight}{3pt}
+    \begin{table}[h]
+    \centering
+    \hspace*{-1.5cm}
+    \begin{tabular}{l|r|r|r|r|r}
+                              &      Mean &       STD &    Min & Median &    Max \\ \hline
+      vacation (days)         &    20.664 &    20.501 &    0.0 &     14 &    189 \\ \hline
+      paid\_vacation (days)   &     3.277 &     1.938 &    0.2 &      3 &     30 \\ \hline
+      age (years)             &    37.673 &    11.171 &   19.0 &     35 &     76 \\ \hline
+      fam\_size (people)      &     2.882 &     1.448 &    1.0 &      3 &     12 \\ \hline
+      is\_female              &     0.203 &     0.403 &    0.0 &      0 &      1 \\ \hline
+      income83 (dollars)      & 32500.483 & 20482.959 & 1399.0 &  29000 & 221920 \\ \hline
+      salary (dollars yearly) & 23400.254 & 12402.249 & 2500.0 &  21170 & 112000
+    \end{tabular}
+    \hspace*{-1.5cm}
+    \caption{Summary Statistics 1984}
+    \label{1984-summary}
+      Notes: units top to bottom are days, days, years, people, x, dollars, dollars per year.
+    \end{table}
+    %%%%%%%%%%
+    \setlength{\extrarowheight}{3pt}
+    \begin{table}[h]
+    \centering
+    \hspace*{-1.5cm}
+    \begin{tabular}{l|r|r|r|r|r}
+                     &      Mean &       STD &     Min & Median &    Max \\ \hline
+      vacation       &    16.230 &    21.216 &    0.00 &     14 &    322 \\ \hline
+      paid\_vacation &    13.862 &     2.274 &    9.25 &     14 &     18 \\ \hline
+      age            &    41.796 &    11.718 &   19.00 &     40 &     84 \\ \hline
+      fam\_size      &     2.779 &     1.409 &    1.00 &      2 &      9 \\ \hline
+      is\_female     &     0.228 &     0.420 &    0.00 &      0 &      1 \\ \hline
+      income10       & 93802.409 & 63941.306 & 1000.00 &  80000 & 399000 \\ \hline
+      salary         & 65477.161 & 40887.889 & 1200.00 &  55000 & 360000
+    \end{tabular}
+    \hspace*{-1.5cm}
+    \caption{Summary Statistics 2011}
+    \label{2011-summary}
+      Notes: every cell contains the correlation ($r$) between the row and column headers.
+    \end{table}
+
+
+    %%%%%%%%%%%%%%%%%%%%%
+    % OLS Results
     \setlength{\extrarowheight}{3pt}
     \begin{table}[h]
     \centering
     \hspace*{-1.5cm}
     \begin{tabular}{l|r|r}
     Variable            &             1984 Coefficients &              2011 Coefficients \\ \hline \hline
-    intercept           &   2.300\textcolor{white}{***} &  -35.805**\textcolor{white}{*} \\
-                        & (2.531)\textcolor{white}{***} & (13.583)\textcolor{white}{***} \\ \hline
-    paid vacation       &   1.718*\textcolor{white}{**} &    6.172**\textcolor{white}{*} \\
-                        & (0.813)\textcolor{white}{***} &  (2.022)\textcolor{white}{***} \\ \hline
-    (paid vacation$)^2$ &  -0.008\textcolor{white}{***} &   -0.207**\textcolor{white}{*} \\
-                        & (0.064)\textcolor{white}{***} &  (0.075)\textcolor{white}{***} \\ \hline
-    age                 &   0.185***\textcolor{white}{} &    0.184**\textcolor{white}{*} \\
-                        & (0.047)\textcolor{white}{***} &  (0.058)\textcolor{white}{***} \\ \hline
-    family size         &  -0.009\textcolor{white}{***} &   -0.229\textcolor{white}{***} \\
-                        & (0.334)\textcolor{white}{***} &  (0.323)\textcolor{white}{***} \\ \hline
-    is\_female          &   6.103***\textcolor{white}{} &   -3.417**\textcolor{white}{*} \\
-                        & (1.537)\textcolor{white}{***} &  (1.203)\textcolor{white}{***} \\ \hline
+    intercept           &   2.284\textcolor{white}{***} &  -35.142*\textcolor{white}{**} \\
+                        & (2.528)\textcolor{white}{***} & (13.753)\textcolor{white}{***} \\ \hline
+    paid vacation       &   1.771*\textcolor{white}{**} &    6.010**\textcolor{white}{*} \\
+                        & (0.816)\textcolor{white}{***} &  (2.056)\textcolor{white}{***} \\ \hline
+    (paid vacation$)^2$ &  -0.010\textcolor{white}{***} &   -0.201**\textcolor{white}{*} \\
+                        & (0.064)\textcolor{white}{***} &  (0.076)\textcolor{white}{***} \\ \hline
+    age                 &   0.190***\textcolor{white}{} &    0.182**\textcolor{white}{*} \\
+                        & (0.047)\textcolor{white}{***} &  (0.062)\textcolor{white}{***} \\ \hline
+    family size         &  -0.047\textcolor{white}{***} &   -0.278\textcolor{white}{***} \\
+                        & (0.335)\textcolor{white}{***} &  (0.324)\textcolor{white}{***} \\ \hline
+    is female           &   6.160***\textcolor{white}{} &   -3.082*\textcolor{white}{**} \\
+                        & (1.542)\textcolor{white}{***} &  (1.359)\textcolor{white}{***} \\ \hline
     income              &   0.000***\textcolor{white}{} &    0.000\textcolor{white}{***} \\
                         & (0.000)\textcolor{white}{***} &  (0.000)\textcolor{white}{***}
     \end{tabular}
@@ -73,5 +125,40 @@
       *: p \textless\ 0.05, **: p \textless\ 0.01, ***: p \textless\ 0.001
     \end{table}
 
+
+    %%%%%%%%%%%%%%%%%%%%%
+    % Vars and Names
+    \setlength{\extrarowheight}{3pt}
+    \begin{table}[h]
+    \centering
+    \hspace*{-1.5cm}
+    \begin{tabular}{l|l|l}
+        Year & Variable & Description \\ \hline \hline
+      \multirow{9}{*}{1984}
+        & V10474 & whether or not job has paid vacation      \\ \cline{2-3}
+        & V10475 & amount of paid vacation gicen (in hours)  \\ \cline{2-3}
+        & V10553 & whether or not paid vacation was taken    \\ \cline{2-3}
+        & V10554 & how much vacation was taken (in weeks)    \\ \cline{2-3}
+        & V10419 & age (in years)                            \\ \cline{2-3}
+        & V10222 & number of people in your family unit      \\ \cline{2-3}
+        & V10277 & total taxable income in 1983 (in USD)     \\ \cline{2-3}
+        & V10420 & sex (male or female)                      \\ \cline{2-3}
+        & V10463 & salary (dollars per hour)                 \\ \hline
+      \multirow{12}{*}{2011}
+        & ER47480 & industry code                               \\ \cline{2-3}
+        & ER47630 & whether or not the respondent took vacation \\ \cline{2-3}
+        & ER47631 & how much vacation was taken (in days)       \\ \cline{2-3}
+        & ER47633 & how much vacation was taken (in weeks)      \\ \cline{2-3}
+        & ER47635 & how much vacation was taken (in months)     \\ \cline{2-3}
+        & ER47317 & age (in years)                              \\ \cline{2-3}
+        & ER47316 & fam_size (in people)                        \\ \cline{2-3}
+        & ER52259 & income10 (in dollars)                       \\ \cline{2-3}
+        & ER47318 & sex (male or female)                        \\ \cline{2-3}
+        & ER47495 & salary received (unit below)                \\ \cline{2-3}
+        & ER47496 & salary unit (unit for salary)               \\ \hline
+    \end{tabular}
+    \hspace*{-1.5cm}
+    \caption{PSID variables and their descriptions}
+    \end{table}
 
 \end{document}

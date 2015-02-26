@@ -19,8 +19,7 @@ results/2011/corr.txt
 results/2011/het_breushpagan.txt
 results/2011/ols1.txt
 results/2011/ols2.txt
-results/2011/scatter_matrix1.png
-results/2011/scatter_matrix2.png
+results/2011/scatter_matrix.png
 results/2011/summary.txt
 """
 
@@ -45,8 +44,7 @@ CORR_TXT = get_f_path('corr.txt')
 HET_BP_TXT = get_f_path('het_breushpagan.txt')
 OLS1_TXT = get_f_path('ols1.txt')
 OLS2_TXT = get_f_path('ols2.txt')
-SCAT_MATRIX1_PNG = get_f_path('scatter_matrix1.png')
-SCAT_MATRIX2_PNG = get_f_path('scatter_matrix2.png')
+SCAT_MATRIX_PNG = get_f_path('scatter_matrix.png')
 SUMMARY_TXT = get_f_path('summary.txt')
 
 f_exists = (lambda file_: os.path.isfile(file_))
@@ -91,6 +89,8 @@ def clean(df):
     # remove outliers
     df.ix[df.salary < 1e3] = np.nan
     df.ix[df.salary >= 400e3] = np.nan
+    df.ix[df.income10 < 1e3] = np.nan
+    df.ix[df.income10 >= 400e3] = np.nan
     # make employment into dummy for is_employed
     df['is_employed'] = df.employment
     # remove all those not working
@@ -116,13 +116,15 @@ def do_stats(df):
 
     # Summary stats
     if not f_exists(SUMMARY_TXT):
+        summary = df.describe().T
+        summary = np.round(summary, decimals=3)
         with open(SUMMARY_TXT, 'w') as f:
-            f.write(df.describe().to_string())
+            f.write(summary.to_string())
 
     # Test for autocorrelation: scatter matrix, correlation, run OLS
-    if not f_exists(SCAT_MATRIX1_PNG):
+    if not f_exists(SCAT_MATRIX_PNG):
         scatter_matrix(df, alpha=0.2, figsize=(64, 64), diagonal='hist')
-        pylab.savefig(SCAT_MATRIX1_PNG, bbox_inches='tight')
+        pylab.savefig(SCAT_MATRIX_PNG, bbox_inches='tight')
     if not f_exists(CORR_TXT):
         corr = df.corr()
         corr = corr.reindex_axis(
@@ -150,11 +152,7 @@ def do_stats(df):
     # Need to drop salary, too much autocorrelation
     df.drop('salary', axis=1, inplace=True)
 
-    # make a new scatter matrix to use for the paper
-    if not f_exists(SCAT_MATRIX2_PNG):
-        scatter_matrix(df, alpha=0.2, figsize=(64, 64), diagonal='hist')
-        pylab.savefig(SCAT_MATRIX2_PNG, bbox_inches='tight')
-
+    # Test for autocorrelation: scatter matrix, correlation, run OLS
     if not f_exists(HET_BP_TXT):
         ols_results = smf.ols(
             formula='vacation ~ paid_vacation + np.square(paid_vacation) + '
