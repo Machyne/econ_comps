@@ -59,7 +59,7 @@ def _calc_vacation(row):
     elif took == 5:
         return 0
     else:
-        return days + (7 * weeks) + (30 * months)
+        return days + (5 * weeks) + (22 * months)
 
 
 def _calc_salary(row):

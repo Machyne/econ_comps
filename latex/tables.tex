@@ -27,7 +27,7 @@
     \hspace*{-1.5cm}
     \caption{Correlation Matrix 1984}
     \label{1984-correlation}
-      Notes: every cell contains the correlation ($r$) between the row and column headers.
+      Note: every cell contains the correlation ($r$) between the row and column headers.
     \end{table}
     %%%%%%%%%%
     \setlength{\extrarowheight}{3pt}
@@ -36,7 +36,7 @@
     \hspace*{-1.5cm}
     \begin{tabular}{l|r|r|r|r|r|r|r}
                      & vacation & paid\_vacation &    age & fam\_size & is\_female & income10 & salary \\ \hline
-      vacation       &    1.000 &          0.049 &  0.116 &     0.002 &     -0.070 &    0.100 &  0.133 \\ \hline
+      vacation       &    1.000 &          0.051 &  0.123 &    -0.003 &     -0.069 &    0.109 &  0.142 \\ \hline
       paid\_vacation &          &          1.000 & -0.065 &    -0.050 &      0.113 &    0.003 &  0.069 \\ \hline
       age            &          &                &  1.000 &    -0.032 &     -0.069 &    0.281 &  0.239 \\ \hline
       fam\_size      &          &                &        &     1.000 &     -0.356 &    0.163 &  0.091 \\ \hline
@@ -47,7 +47,7 @@
     \hspace*{-1.5cm}
     \caption{Correlation Matrix 2011}
     \label{2011-correlation}
-      Notes: every cell contains the correlation ($r$) between the row and column headers.
+      Note: every cell contains the correlation ($r$) between the row and column headers.
     \end{table}
 
 
@@ -58,19 +58,20 @@
     \centering
     \hspace*{-1.5cm}
     \begin{tabular}{l|r|r|r|r|r}
-                              &      Mean &       STD &    Min & Median &    Max \\ \hline
-      vacation (days)         &    20.664 &    20.501 &    0.0 &     14 &    189 \\ \hline
-      paid\_vacation (days)   &     3.277 &     1.938 &    0.2 &      3 &     30 \\ \hline
-      age (years)             &    37.673 &    11.171 &   19.0 &     35 &     76 \\ \hline
-      fam\_size (people)      &     2.882 &     1.448 &    1.0 &      3 &     12 \\ \hline
-      is\_female              &     0.203 &     0.403 &    0.0 &      0 &      1 \\ \hline
-      income83 (dollars)      & 32500.483 & 20482.959 & 1399.0 &  29000 & 221920 \\ \hline
-      salary (dollars yearly) & 23400.254 & 12402.249 & 2500.0 &  21170 & 112000
+      Variable       &      Mean &       STD &    Min & Median &        Max \\ \hline \hline
+      vacation       &    14.760 &    14.643 &    0.0 &     10 &    135.000 \\ \hline
+      paid\_vacation &     3.277 &     1.938 &    0.2 &      3 &     30.025 \\ \hline
+      age            &    37.673 &    11.171 &   19.0 &     35 &     76.000 \\ \hline
+      fam\_size      &     2.882 &     1.448 &    1.0 &      3 &     12.000 \\ \hline
+      is\_female     &     0.203 &     0.403 &    0.0 &      0 &      1.000 \\ \hline
+      income83       & 32500.483 & 20482.959 & 1399.0 &  29000 & 221920.000 \\ \hline
+      salary         & 23400.254 & 12402.249 & 2500.0 &  21170 & 112000.000
     \end{tabular}
     \hspace*{-1.5cm}
     \caption{Summary Statistics 1984}
     \label{1984-summary}
-      Notes: units top to bottom are days, days, years, people, x, dollars, dollars per year.
+      Notes: units top to bottom are days, days, years, people, (none), dollars, and dollars per year.
+      See TODO for a more in depth description.
     \end{table}
     %%%%%%%%%%
     \setlength{\extrarowheight}{3pt}
@@ -78,19 +79,20 @@
     \centering
     \hspace*{-1.5cm}
     \begin{tabular}{l|r|r|r|r|r}
-                     &      Mean &       STD &     Min & Median &    Max \\ \hline
-      vacation       &    16.230 &    21.216 &    0.00 &     14 &    322 \\ \hline
-      paid\_vacation &    13.862 &     2.274 &    9.25 &     14 &     18 \\ \hline
-      age            &    41.796 &    11.718 &   19.00 &     40 &     84 \\ \hline
-      fam\_size      &     2.779 &     1.409 &    1.00 &      2 &      9 \\ \hline
-      is\_female     &     0.228 &     0.420 &    0.00 &      0 &      1 \\ \hline
-      income10       & 93802.409 & 63941.306 & 1000.00 &  80000 & 399000 \\ \hline
-      salary         & 65477.161 & 40887.889 & 1200.00 &  55000 & 360000
+      Variable       &      Mean &       STD &     Min & Median &        Max \\ \hline \hline
+      vacation       &    12.166 &    15.456 &    0.00 &     10 &    230.000 \\ \hline
+      paid\_vacation &    13.862 &     2.274 &    9.25 &     14 &     17.917 \\ \hline
+      age            &    41.796 &    11.718 &   19.00 &     40 &     84.000 \\ \hline
+      fam\_size      &     2.779 &     1.409 &    1.00 &      2 &      9.000 \\ \hline
+      is\_female     &     0.228 &     0.420 &    0.00 &      0 &      1.000 \\ \hline
+      income10       & 93802.409 & 63941.306 & 1000.00 &  80000 & 399000.000 \\ \hline
+      salary         & 65477.161 & 40887.889 & 1200.00 &  55000 & 360000.000
     \end{tabular}
     \hspace*{-1.5cm}
     \caption{Summary Statistics 2011}
     \label{2011-summary}
-      Notes: every cell contains the correlation ($r$) between the row and column headers.
+      Notes: units top to bottom are days, days, years, people, (none), dollars, and dollars per year.
+      See TODO for a more in depth description.
     \end{table}
 
 
@@ -102,18 +104,18 @@
     \hspace*{-1.5cm}
     \begin{tabular}{l|r|r}
     Variable            &             1984 Coefficients &              2011 Coefficients \\ \hline \hline
-    intercept           &   2.284\textcolor{white}{***} &  -35.142*\textcolor{white}{**} \\
-                        & (2.528)\textcolor{white}{***} & (13.753)\textcolor{white}{***} \\ \hline
-    paid vacation       &   1.771*\textcolor{white}{**} &    6.010**\textcolor{white}{*} \\
-                        & (0.816)\textcolor{white}{***} &  (2.056)\textcolor{white}{***} \\ \hline
-    (paid vacation$)^2$ &  -0.010\textcolor{white}{***} &   -0.201**\textcolor{white}{*} \\
-                        & (0.064)\textcolor{white}{***} &  (0.076)\textcolor{white}{***} \\ \hline
-    age                 &   0.190***\textcolor{white}{} &    0.182**\textcolor{white}{*} \\
-                        & (0.047)\textcolor{white}{***} &  (0.062)\textcolor{white}{***} \\ \hline
-    family size         &  -0.047\textcolor{white}{***} &   -0.278\textcolor{white}{***} \\
-                        & (0.335)\textcolor{white}{***} &  (0.324)\textcolor{white}{***} \\ \hline
-    is female           &   6.160***\textcolor{white}{} &   -3.082*\textcolor{white}{**} \\
-                        & (1.542)\textcolor{white}{***} &  (1.359)\textcolor{white}{***} \\ \hline
+    intercept           &   1.632\textcolor{white}{***} &  -25.192*\textcolor{white}{**} \\
+                        & (1.806)\textcolor{white}{***} & (10.008)\textcolor{white}{***} \\ \hline
+    paid vacation       &   1.265*\textcolor{white}{**} &    4.316**\textcolor{white}{*} \\
+                        & (0.583)\textcolor{white}{***} &  (1.495)\textcolor{white}{***} \\ \hline
+    (paid vacation$)^2$ &  -0.007\textcolor{white}{***} &   -0.144*\textcolor{white}{**} \\
+                        & (0.046)\textcolor{white}{***} &  (0.055)\textcolor{white}{***} \\ \hline
+    age                 &   0.136***\textcolor{white}{} &    0.137**\textcolor{white}{*} \\
+                        & (0.034)\textcolor{white}{***} &  (0.044)\textcolor{white}{***} \\ \hline
+    family size         &  -0.033\textcolor{white}{***} &   -0.266\textcolor{white}{***} \\
+                        & (0.239)\textcolor{white}{***} &  (0.236)\textcolor{white}{***} \\ \hline
+    is female           &   4.400***\textcolor{white}{} &   -2.125*\textcolor{white}{**} \\
+                        & (1.101)\textcolor{white}{***} &  (0.993)\textcolor{white}{***} \\ \hline
     income              &   0.000***\textcolor{white}{} &    0.000\textcolor{white}{***} \\
                         & (0.000)\textcolor{white}{***} &  (0.000)\textcolor{white}{***}
     \end{tabular}
@@ -134,12 +136,12 @@
     \hspace*{-1.5cm}
     \begin{tabular}{l|r|r}
       Variable      & $t$-statistic & Two-Tailed p-Value \\ \hline \hline
-      vacation      &         4.617 & 0.0000             \\ \hline
-      paid vacation &      -139.194 & 0.0000             \\ \hline
-      age           &       -10.934 & 0.0000             \\ \hline
-      fam size      &         2.281 & 0.0227             \\ \hline
-      is female     &        -1.145 & 0.2525             \\ \hline
-      income83      &       -35.075 & 0.0000
+      vacation      &         3.543 &              0.000 \\ \hline
+      paid vacation &      -139.194 &              0.000 \\ \hline
+      age           &       -10.934 &              0.000 \\ \hline
+      fam size      &         2.281 &              0.023 \\ \hline
+      is female     &        -1.145 &              0.252 \\ \hline
+      income83      &       -35.074 &              0.000
     \end{tabular}
     \hspace*{-1.5cm}
     \caption{Student's $t$-test results for all variables.}
@@ -181,5 +183,6 @@
     \hspace*{-1.5cm}
     \caption{PSID variables and their descriptions}
     \end{table}
+    % TODO New table with MY variables.
 
 \end{document}

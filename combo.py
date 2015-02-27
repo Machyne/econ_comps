@@ -21,5 +21,6 @@ if __name__ == '__main__':
     for col in sorted(df1984.columns, key=COL_ORDER.index):
         colb = col if col != 'income83' else 'income10'
         t = ttest_rel(df1984[col], df2011[colb])
+        t = [np.round(i, decimals=3) for i in t]
         print col
         print '\n'.join('{}: {}'.format(n, v) for n, v in zip(names, t))

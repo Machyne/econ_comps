@@ -65,7 +65,7 @@ def clean(df):
     df['is_female'] = df['sex'] - 1
     # figure out total vacation taken
     df['vacation'] = df.apply(
-        _calc_vacation('took_vac', 'weeks_vac', 99, 7), axis=1)
+        _calc_vacation('took_vac', 'weeks_vac', 99, 5), axis=1)
     # fix salary to be annual amount
     df.salary.replace(0.00, np.nan, inplace=True)
     df.salary.replace(99.99, np.nan, inplace=True)
