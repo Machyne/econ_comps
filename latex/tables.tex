@@ -2,10 +2,12 @@
 \usepackage{tabularx}
 \usepackage{multirow}
 \usepackage{xcolor}
+\usepackage{graphicx}
 \title{Econ Comps}
 \author{Matt Cotter}
 \date{February 2015}
 \begin{document}
+    \pagenumbering{gobble}
 
 
     %%%%%%%%%%%%%%%%%%%%%
@@ -71,7 +73,7 @@
     \caption{Summary Statistics 1984}
     \label{1984-summary}
       Notes: units top to bottom are days, days, years, people, (none), dollars, and dollars per year.
-      See TODO for a more in depth description.
+      See Table A.2 for an in depth description of variables.
     \end{table}
     %%%%%%%%%%
     \setlength{\extrarowheight}{3pt}
@@ -92,7 +94,7 @@
     \caption{Summary Statistics 2011}
     \label{2011-summary}
       Notes: units top to bottom are days, days, years, people, (none), dollars, and dollars per year.
-      See TODO for a more in depth description.
+      See Table A.2 for an in depth description of variables.
     \end{table}
 
 
@@ -145,44 +147,97 @@
     \end{tabular}
     \hspace*{-1.5cm}
     \caption{Student's $t$-test results for all variables.}
+    \label{ttest}
+      Notes: Each row is a comparison of the given variable between the years
+      1984 and 2011. The null hypothesis is that the differences in the data
+      sets are due to randomness, not a difference in the population.
     \end{table}
 
     %%%%%%%%%%%%%%%%%%%%%
     % Vars and Names
+    \setcounter{table}{0}
+    \renewcommand{\thetable}{A.\arabic{table}}
     \setlength{\extrarowheight}{3pt}
     \begin{table}[h]
     \centering
     \hspace*{-1.5cm}
     \begin{tabular}{l|l|l}
-        Year & Variable & Description \\ \hline \hline
+      Year & Variable & Description \\ \hline \hline
       \multirow{9}{*}{1984}
         & V10474 & whether or not job has paid vacation      \\ \cline{2-3}
         & V10475 & amount of paid vacation gicen (in hours)  \\ \cline{2-3}
         & V10553 & whether or not paid vacation was taken    \\ \cline{2-3}
         & V10554 & how much vacation was taken (in weeks)    \\ \cline{2-3}
         & V10419 & age (in years)                            \\ \cline{2-3}
-        & V10222 & number of people in your family unit      \\ \cline{2-3}
-        & V10277 & total taxable income in 1983 (in USD)     \\ \cline{2-3}
+        & V10222 & number of people in family unit           \\ \cline{2-3}
+        & V10277 & total taxable income in 1983 (in dollars) \\ \cline{2-3}
         & V10420 & sex (male or female)                      \\ \cline{2-3}
         & V10463 & salary (dollars per hour)                 \\ \cline{2-3}
         & V10453 & whether or not the respondent is employed \\ \hline
       \multirow{12}{*}{2011}
-        & ER47480 & industry code                               \\ \cline{2-3}
+        & ER47480 & industry code$^*$                           \\ \cline{2-3}
         & ER47630 & whether or not the respondent took vacation \\ \cline{2-3}
         & ER47631 & how much vacation was taken (in days)       \\ \cline{2-3}
         & ER47633 & how much vacation was taken (in weeks)      \\ \cline{2-3}
         & ER47635 & how much vacation was taken (in months)     \\ \cline{2-3}
         & ER47317 & age (in years)                              \\ \cline{2-3}
-        & ER47316 & family size (in people)                     \\ \cline{2-3}
-        & ER52259 & income10 (in dollars)                       \\ \cline{2-3}
+        & ER47316 & number of people in family unit             \\ \cline{2-3}
+        & ER52259 & total taxable income in 2011 (in dollars)   \\ \cline{2-3}
         & ER47318 & sex (male or female)                        \\ \cline{2-3}
-        & ER47495 & salary received (unit below)                \\ \cline{2-3}
+        & ER47495 & salary received (multiple units)            \\ \cline{2-3}
         & ER47496 & salary unit (unit for salary)               \\ \cline{2-3}
         & ER47448 & whether or not the respondent is employed   \\ \hline
     \end{tabular}
     \hspace*{-1.5cm}
-    \caption{PSID variables and their descriptions}
+    \caption{All PSID variables used with descriptions}
+    \label{psid-vars}
+      *: 3-digit industry code from
+      \textit{2000 Census of Population and Housing:
+              Alphabetical Index Of Industries And Occupations}
     \end{table}
-    % TODO New table with MY variables.
+    %%%%%%%%%%
+    \setlength{\extrarowheight}{3pt}
+    \begin{table}[h]
+    \centering
+    \hspace*{-1.5cm}
+    \begin{tabular}{l|l|l}
+      Variable & Name                & Description                                  \\ \hline \hline
+      $y$      & vacation            & amount of vacation taken (days)              \\ \hline
+      $x_1$    & paid\_vacation      & amount of paid vacation available (days)     \\ \hline
+      $x_2$    & age                 & age (years)                                  \\ \hline
+      $x_3$    & fam\_size           & number of people in family unit              \\ \hline
+      $x_4$    & is\_female          & 1: female, 0: male                           \\ \hline
+      $x_5$    & income83 / income10 & total taxable income in given year (dollars)
+    \end{tabular}
+    \hspace*{-1.5cm}
+    \caption{All variables used in my regressions with descriptions}
+    \end{table}
+
+    %%%%%%%%%%%%%%%%%%%%%
+    % Captions for figures
+    \setcounter{figure}{0} \renewcommand{\thefigure}{A.\arabic{figure}}
+    \begin{figure}[h]
+    \centering
+    \hspace*{-1.2in}
+    \includegraphics[width=7.0in]{../results/1984/scatter_matrix.png}
+    \hspace*{-1.2in}
+    \caption{Scatter matrix of every variable in 1984 data set.}
+    \label{scatter-1984}
+      Notes: Diagonals are histograms of the variable. Axes (top to bottom /
+      left to right) are vacation, paid\_vacation, age, fam\_size, is\_female,
+      and income83.
+    \end{figure}
+    %%%%%%%%%%
+    \begin{figure}[h]
+    \centering
+    \hspace*{-1.2in}
+    \includegraphics[width=7.0in]{../results/1984/scatter_matrix.png}
+    \hspace*{-1.2in}
+    \caption{Scatter matrix of every variable in 2011 data set.}
+    \label{scatter-1984}
+      Notes: Diagonals are histograms of the variable. Axes (top to bottom /
+      left to right) are vacation, paid\_vacation, age, fam\_size, is\_female,
+      and income10.
+    \end{figure}
 
 \end{document}
