@@ -1,4 +1,4 @@
-# Matt Cotter's Carleton College Senior Economics Project
+# Vacation Day Usage Modeled by Availability and Behavior
 
 # Set Up
 - install all requirements (`pip install -r requirements.txt`)
@@ -9,8 +9,7 @@
 - process the psid data:
     + `python psid/make_csvs.py`
 - run all analysis:
-    + `python full_1984.py`
-    + `python full_2011.py`
+    + `python combo.py`
 - to clean up all results `./clean-results`
 
 #Runnable code (check for must run as main):
@@ -28,6 +27,7 @@
 - [ ] `vars_to_csv.py`
 
 ## top level
-- [x] `full_1984.py`
-- [x] `full_2011.py`
+- [x] `combo.py`
+- [ ] `full_1984.py`
+- [ ] `full_2011.py`
 - [ ] `industry_to_days.py`
